@@ -1,0 +1,17 @@
+sentence-transformers
+numpy
+flask
+flask-cors
+redis
+transformers
+torch
+accelerate
+sentencepiece
+protobuf
+python-dotenv
+streamlit
+datasets
+huggingface_hub
+langchain-core
+langchain-google-genai
+google-generativeai

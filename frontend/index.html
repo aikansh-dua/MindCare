@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" id="themeColor" content="#d9e8df" />
+    <meta name="description" content="MindCare — a calm space to talk through what you're feeling." />
+    <title>MindCare</title>
+    <script>
+      (() => {
+        const t = localStorage.getItem("mindcare_theme");
+        document.documentElement.dataset.theme =
+          t === "dark" || t === "light" ? t : "light";
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,480;9..144,600&family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@300;400;500;600&family=Sora:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css?v=8" />
+  </head>
+  <body>
+    <div class="sky bg-velvet-light" aria-hidden="true">
+      <div class="wash wash-a"></div>
+      <div class="wash wash-b"></div>
+      <div class="wash wash-c"></div>
+      <div class="mist"></div>
+      <div class="emerge-glow"></div>
+    </div>
+
+    <div class="app" id="app" data-view="welcome" data-mood="idle">
+      <!-- Living breath at the heart of the room -->
+      <div class="breath-field" id="breathField" aria-hidden="true">
+        <div class="halo halo-outer"></div>
+        <div class="halo halo-mid"></div>
+        <div class="halo halo-core" id="breathCore"></div>
+        <div class="ripple r1"></div>
+        <div class="ripple r2"></div>
+      </div>
+
+      <header class="top-nav">
+        <button type="button" class="wordmark" id="homeBtn" title="Home">MindCare</button>
+        <div class="top-nav-actions">
+          <button
+            type="button"
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Switch theme"
+            title="Switch theme"
+          >
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-label" id="themeToggleLabel">Velvet</span>
+          </button>
+          <button type="button" class="nav-text" id="momentsToggle">Moments</button>
+          <button type="button" class="nav-text" id="openHelplines">Helplines</button>
+        </div>
+      </header>
+
+      <section class="welcome" id="welcome">
+        <div class="welcome-copy">
+          <p class="brand-line">MindCare</p>
+          <h1 class="headline">Breathe.<br />Then tell me what’s here.</h1>
+          <p class="lede">
+            A soft room for whatever you’re carrying — not therapy, just company that listens.
+          </p>
+          <button type="button" class="begin" id="startChat">
+            <span class="begin-glow" aria-hidden="true"></span>
+            <span>Enter the room</span>
+          </button>
+        </div>
+
+        <div class="moments-rail" id="momentsRail" hidden>
+          <p class="rail-label">Recent Moments</p>
+          <div class="rail-track" id="recentsList" role="list"></div>
+        </div>
+      </section>
+
+      <section class="room" id="chatShell" hidden aria-hidden="true">
+        <div class="room-heading">
+          <p class="moment-title" id="chatTitle">This moment</p>
+          <button type="button" class="nav-text" id="newChatBtn">New moment</button>
+        </div>
+
+        <main class="stream" id="thread" aria-live="polite" aria-relevant="additions"></main>
+
+        <p class="presence" id="metaLine" hidden></p>
+
+        <form class="speak" id="composer" autocomplete="off">
+          <label class="sr-only" for="messageInput">Your message</label>
+          <textarea
+            id="messageInput"
+            rows="1"
+            maxlength="2000"
+            placeholder="Tell me what’s on your mind…"
+            required
+          ></textarea>
+          <button type="submit" class="speak-send" id="sendBtn" aria-label="Send">
+            <span class="send-label">Send</span>
+            <span class="send-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Moments sheet (not a chatbot sidebar) -->
+    <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+    <aside class="moments-sheet" id="momentsSheet" hidden aria-label="Your moments">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2>Your moments</h2>
+        <button type="button" class="nav-text" id="closeMoments">Close</button>
+      </div>
+      <p class="sheet-lede">Each conversation keeps a quiet title from how it began.</p>
+      <nav class="moments-list" id="momentsList"></nav>
+      <p class="moments-empty" id="recentsEmpty">No moments yet — when you speak, they’ll gather here.</p>
+      <button type="button" class="sheet-new" id="sheetNewChat">Start a new moment</button>
+    </aside>
+
+    <dialog class="help-dialog" id="helpDialog" aria-labelledby="helpTitle">
+      <form method="dialog" class="help-card">
+        <h2 id="helpTitle">Helplines</h2>
+        <p class="help-lede">
+          If you feel unsafe or in crisis, reach a trained helpline or emergency services now.
+        </p>
+        <ul class="help-list">
+          <li><span>India (iCall)</span><a href="tel:9152987821">9152987821</a></li>
+          <li><span>India (Vandrevala)</span><a href="tel:18602662345">1860 266 2345</a></li>
+          <li><span>Emergency</span><span>Local emergency number</span></li>
+        </ul>
+        <p class="help-note">MindCare is a supportive companion only — not professional care.</p>
+        <button type="submit" class="begin help-close" value="close"><span>Close</span></button>
+      </form>
+    </dialog>
+
+    <script src="/static/app.js?v=8" defer></script>
+  </body>
+</html>

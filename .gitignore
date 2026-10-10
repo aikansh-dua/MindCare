@@ -1,0 +1,14 @@
+.vercel
+.venv
+.miniforge3/
+__pycache__
+lib/
+.env
+counseling_rag.json
+counseling_rag_embeddings.npz
+.streamlit/credentials.toml
+node_modules/
+.DS_Store
+.cursor/
+chat_memory.json
+user_profiles.json
